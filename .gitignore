@@ -9,3 +9,9 @@ __pycache__/
 
 data/*.csv
 data/*.mat
+# Generated threshold plots
+data/threshold_performance.png
+data/threshold_tradeoff.png
+
+# Local agent/tooling state
+.agents/
