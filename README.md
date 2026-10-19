@@ -23,7 +23,7 @@ This project uses the Residential Series Arc Fault Dataset obtained from Zenodo.
 - Samples per waveform: 2,000
 - Labels: `0` = Normal, `1` = Arc Fault
 
-See `DATASET.md` for dataset information. The raw dataset and generated CSV files are not included in the repository.
+See [`data/DATASET.md`](data/DATASET.md) for dataset information. The raw dataset and generated CSV files are not included in the repository.
 
 ## 🧪 Feature Extraction
 
@@ -46,7 +46,7 @@ A Random Forest classifier is trained using the extracted features. Validation e
 
 ![Missed arcs versus false alarms](data/threshold_tradeoff.png)
 
-The current candidate uses all 12 features with a threshold of `0.30`. On the validation split, it achieved approximately **98.88% accuracy**, **97.87% arc recall**, and **98.92% arc precision**, with 2 missed arcs and 2 false alarms.
+The current candidate uses all 12 features with a threshold of `0.30`. On the validation split, it achieved approximately **98.50% accuracy**, **97.87% arc recall**, and **97.87% arc precision**, with 2 missed arcs and 2 false alarms.
 
 These are validation results, not a guarantee of real-world detection performance.
 
@@ -73,6 +73,13 @@ Create and activate a virtual environment, then install the dependencies:
 python -m venv .venv
 ```
 
+Linux / macOS:
+
+```bash
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
 Windows PowerShell:
 
 ```powershell
@@ -80,7 +87,26 @@ Windows PowerShell:
 pip install -r requirements.txt
 ```
 
-Obtain the dataset as described in `DATASET.md`, and place the required files in `data/`.
+> **Note:** the scripts inside `.venv` store absolute paths. If you move or
+> rename the project folder after creating the environment, recreate it
+> (`python -m venv .venv` and reinstall), otherwise commands such as
+> `streamlit` or `jupyter` fail with a "bad interpreter" error.
+
+Obtain the dataset as described in [`data/DATASET.md`](data/DATASET.md), and place the required files in `data/`.
+
+Generate the project data files by running the notebooks **in order**. Notebook 01
+writes `data/train.csv` / `data/test.csv` (the raw waveforms the dashboard reads),
+notebook 02 writes the feature tables, and notebook 03 retrains the model (a
+pre-trained model is already committed, so retraining is optional):
+
+```bash
+jupyter nbconvert --to notebook --execute --inplace notebooks/01_data_exploration.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/02_feature_extraction.ipynb
+jupyter nbconvert --to notebook --execute --inplace notebooks/03_training.ipynb
+```
+
+(Opening them in Jupyter and using **Run All** works too. Only run one notebook
+at a time, from top to bottom.)
 
 Launch the dashboard from the project root:
 
@@ -93,6 +119,7 @@ streamlit run app.py
 ```text
 arc fault project/
 ├── data/
+│   ├── DATASET.md
 │   ├── arc_fault_model.joblib
 │   ├── threshold_performance.png
 │   └── threshold_tradeoff.png
@@ -102,7 +129,6 @@ arc fault project/
 │   └── 03_training.ipynb
 ├── app.py
 ├── pipeline.py
-├── DATASET.md
 ├── README.md
 ├── requirements.txt
 └── .gitignore
