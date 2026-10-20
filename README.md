@@ -167,14 +167,4 @@ The publicly available dataset was used to explore arc fault detection using sig
 This project is an educational machine-learning demonstration using recorded waveforms. It is not validated for safety-critical electrical protection or real-world deployment.
 
 
-## 🖥️ Application Screenshots
-
-### Application Interface
-![Arc Fault Detection System](screenshots/one.png)
-
-### Arc Fault Detection
-![Arc fault detection waveform](screenshots/three.png)
-
-### Normal Waveform Monitoring
-![Normal waveform monitoring](screenshots/two.png)
 
