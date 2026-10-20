@@ -59,7 +59,21 @@ The dashboard demonstrates detection using recorded dataset waveforms.
 - **Stop** — pause the simulation.
 - View the waveform, arc probability, and model prediction.
 
-This is a dataset-driven software simulation, not a live electrical monitoring system.
+This is a dataset-driven software simulation, not a live electrical monitoring syste.
+
+### Application Screenshots
+
+![Arc Fault Detection System](screenshots/one.png)
+
+### Arc Fault Detection
+
+![Arc fault detection waveform](screenshots/three.png)
+
+### Normal Waveform Monitoring
+
+![Normal waveform monitoring](screenshots/two.png)
+
+
 
 ## 🛠️ Technologies
 
